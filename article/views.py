@@ -55,4 +55,15 @@ def create(request):
     args['form'] = form
 
     return render_to_response('create_article.html', args)
+
+def like_article(request, article_id):
+    if article_id:
+        a = Article.objects.get(id=article_id)
+        count = a.likes
+        count += 1
+        a.likes = count
+        a.save()
+
+    return HttpResponseRedirect('/articles/get/%s' % article_id)
+
  
