@@ -1,13 +1,13 @@
-from django.shortcuts import render_to_response
+from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.contrib import auth
-from django.core.context_processors import csrf
-from forms import MyRegistrationFrom
+from .forms import MyRegistrationFrom
+
+def home(request):
+    return HttpResponseRedirect('/accounts/login')
 
 def login(request):
-    c = {}
-    c.update(csrf(request))
-    return render_to_response('login.html', c)
+    return render(request, 'login.html', {})
 
 def auth_view(request):
     username = request.POST.get('username', '')
@@ -21,15 +21,14 @@ def auth_view(request):
         return HttpResponseRedirect('/accounts/invalid')
 
 def loggedin(request):
-    return render_to_response('loggedin.html',
-                             {'full_name': request.user.username})
+    return render(request, 'loggedin.html', {'full_name': request.user.username})
 
 def invalid_login(request):
-    return render_to_response('invalid_login.html')
+    return render(request, 'invalid_login.html')
 
 def logout(request):
     auth.logout(request)
-    return render_to_response('logout.html')
+    return render(request, 'logout.html')
 
 def register_user(request):
     if request.method == 'POST':
@@ -38,13 +37,10 @@ def register_user(request):
             form.save()
             return HttpResponseRedirect('/accounts/register_success')
 
-    args = {}
-    args.update(csrf(request))
+    args = {'form': MyRegistrationFrom()}
 
-    args['form'] = MyRegistrationFrom()
-
-    return render_to_response('register.html', args)
+    return render(request, 'register.html', args)
 
 def register_success(request):
-    return render_to_response('register_success.html')
+    return render(request, 'register_success.html')
 

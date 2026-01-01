@@ -1,23 +1,41 @@
-from django.conf.urls import patterns, include, url
+"""
+URL configuration for django_test project.
 
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/5.2/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
-admin.autodiscover()
+from django.urls import include, path
 
-urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'django_test.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
+from . import views
 
-    url(r'^admin/', include(admin.site.urls)),
+urlpatterns = [
+    path('', views.home),
 
     # user auth urls
-    url(r'^accounts/login/$', 'django_test.views.login'),
-    url(r'^accounts/auth/$', 'django_test.views.auth_view'),
-    url(r'^accounts/logout/$', 'django_test.views.logout'),
-    url(r'^accounts/loggedin/$', 'django_test.views.loggedin'),
-    url(r'^accounts/invalid/$', 'django_test.views.invalid_login'),
-    url(r'^accounts/register/$', 'django_test.views.register_user'),
-    url(r'^accounts/register_success/$', 'django_test.views.register_success'),
+    path('accounts/login/', views.login),
+    path('accounts/auth/', views.auth_view),
+    path('accounts/logout/', views.logout),
+    path('accounts/loggedin/', views.loggedin),
+    path('accounts/invalid/', views.invalid_login),
+    path('accounts/register/', views.register_user),
+    path('accounts/register_success/', views.register_success),
 
-    (r'^articles/', include('article.urls')),
-)
+    # articles
+    path('articles/', include('article.urls')),
+
+    # Backend
+    path('admin/', admin.site.urls),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

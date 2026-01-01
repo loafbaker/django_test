@@ -1,4 +1,5 @@
 from django.db import models
+
 from time import time
 
 def get_upload_file_name(instance, filename):
@@ -19,5 +20,4 @@ class Comment(models.Model):
     name = models.CharField(max_length=200)
     body = models.TextField()
     pub_date = models.DateTimeField('date published')
-    article = models.ForeignKey(Article)
-
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)
