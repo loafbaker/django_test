@@ -34,7 +34,7 @@ urlpatterns = [
     path('accounts/register_success/', views.register_success),
 
     # articles
-    path('articles/', include('article.urls')),
+    path('articles/', include('article.urls', namespace='article')),
 
     # Backend
     path('admin/', admin.site.urls),

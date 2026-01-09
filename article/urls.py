@@ -6,9 +6,9 @@ app_name = 'article'
 
 urlpatterns = [
     path('all/', views.articles),
-    re_path(r'^get/(?P<article_id>\d+)/$', views.article),
+    path('get/<int:article_id>/', views.article),
     re_path(r'^language/(?P<language>[a-z\-]+)/$', views.language),
     path('create/', views.create),
-    re_path(r'^like/(?P<article_id>\d+)/$', views.like_article),
-    re_path(r'^add_comment/(?P<article_id>\d+)/$', views.add_comment),
+    path('like/<int:article_id>/', views.like_article),
+    path('add_comment/<int:article_id>/', views.add_comment),
 ]
