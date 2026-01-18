@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.contrib import auth
-from .forms import MyRegistrationFrom
+from .forms import MyRegistrationForm
 
 def home(request):
     return HttpResponseRedirect('/accounts/login')
@@ -32,12 +32,12 @@ def logout(request):
 
 def register_user(request):
     if request.method == 'POST':
-        form = MyRegistrationFrom(request.POST)
+        form = MyRegistrationForm(request.POST)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect('/accounts/register_success')
 
-    args = {'form': MyRegistrationFrom()}
+    args = {'form': MyRegistrationForm()}
 
     return render(request, 'register.html', args)
 
