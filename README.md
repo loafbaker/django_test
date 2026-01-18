@@ -31,6 +31,14 @@ uv run manage.py runserver
 
 Then the app can be accessed through the port `8000` of the `localhost`
 
+## Test the app
+
+Run the command to validate the test
+
+```bash
+python manage.py test article
+```
+
 ## Project structure
 
 ```
