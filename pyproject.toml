@@ -1,0 +1,9 @@
+[project]
+name = "django-test"
+version = "0.15.0"
+description = "My experimental test on Python-Django framework"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "django>=5.2",
+]
