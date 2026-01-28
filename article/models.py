@@ -13,7 +13,7 @@ class Article(models.Model):
     likes = models.IntegerField(default=0)
     thumbnail = models.FileField(upload_to=get_upload_file_name)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
 class Comment(models.Model):
