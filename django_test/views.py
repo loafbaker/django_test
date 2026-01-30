@@ -1,10 +1,9 @@
-from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.shortcuts import redirect, render
 from django.contrib import auth
 from .forms import MyRegistrationForm
 
 def home(request):
-    return HttpResponseRedirect('/accounts/login')
+    return redirect('login')
 
 def login(request):
     return render(request, 'login.html', {})
@@ -16,9 +15,9 @@ def auth_view(request):
 
     if user is not None:
         auth.login(request, user)
-        return HttpResponseRedirect('/accounts/loggedin')
+        return redirect('loggedin')
     else:
-        return HttpResponseRedirect('/accounts/invalid')
+        return redirect('invalid')
 
 def loggedin(request):
     return render(request, 'loggedin.html', {'full_name': request.user.username})
@@ -35,7 +34,7 @@ def register_user(request):
         form = MyRegistrationForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/accounts/register_success')
+            return redirect('register_success')
 
     args = {'form': MyRegistrationForm()}
 

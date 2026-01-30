@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import redirect, render
+from django.http import HttpResponse
 from django.utils import timezone
 
 from .models import Article
@@ -32,7 +32,7 @@ def article(request, article_id=1):
 
 
 def language(request, language='en-gb'):
-    response = HttpResponse("setting language to %s" % language)
+    response = HttpResponse(f"setting language to {language}")
 
     response.set_cookie('lang', language)
 
@@ -47,7 +47,7 @@ def create(request):
         if form.is_valid():
             form.save()
 
-            return HttpResponseRedirect('/articles/all')
+            return redirect('article:all')
     else:
         form = ArticleForm()
 
@@ -64,7 +64,7 @@ def like_article(request, article_id):
         a.likes = count
         a.save()
 
-    return HttpResponseRedirect('/articles/get/%s' % article_id)
+    return redirect('article:single', article_id=article_id)
 
 
 def add_comment(request, article_id):
@@ -78,7 +78,7 @@ def add_comment(request, article_id):
             c.article = a
             c.save()
 
-            return HttpResponseRedirect('/articles/get/%s' % article_id)
+            return redirect('article:single', article_id=article_id)
 
     else:
         f = CommentForm()

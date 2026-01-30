@@ -2,13 +2,13 @@
 
 {% block sidebar %}
 <ul>
-    <li><a href="/articles/all">Cancel</a></li>
+    <li><a href="{% url 'article:all' %}">Cancel</a></li>
 </ul>
 {% endblock %}
 
 {% block content %}
 
-<form action="/articles/create/" method="post" enctype="multipart/form-data">{% csrf_token %}
+<form action="{% url 'article:create' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
     <ul>
         {{ form.as_ul }}
     </ul>

@@ -2,7 +2,7 @@
 
 {% block sidebar %}
 <ul>
-    <li><a href="/articles/all">Articles</a></li>
+    <li><a href="{% url 'article:all' %}">Articles</a></li>
 </ul>
 {% endblock %}
 
@@ -14,13 +14,13 @@
 <p><img src="/static/assets/{{ article.thumbnail }}" width="200"/></p>
 {% endif %}
 <p>{{ article.likes }} people liked this article</p>
-<p><a href="/articles/like/{{ article.id }}">Like</a></p>
+<p><a href="{% url 'article:like_article' article.id %}">Like</a></p>
 
 <h2>Comments</h2>
 {% for c in article.comment_set.all %}
     <p>{{ c.name }}: {{ c.body }}</p>
 {% endfor %}
 
-<p><a href="/articles/add_comment/{{ article.id }}">Add Comment</a></p>
+<p><a href="{% url 'article:add_comment' article.id %}">Add Comment</a></p>
 
 {% endblock %}

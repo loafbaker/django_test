@@ -22,16 +22,16 @@ from django.urls import include, path
 from . import views
 
 urlpatterns = [
-    path('', views.home),
+    path('', views.home, name='home'),
 
     # user auth urls
-    path('accounts/login/', views.login),
-    path('accounts/auth/', views.auth_view),
-    path('accounts/logout/', views.logout),
-    path('accounts/loggedin/', views.loggedin),
-    path('accounts/invalid/', views.invalid_login),
-    path('accounts/register/', views.register_user),
-    path('accounts/register_success/', views.register_success),
+    path('accounts/login/', views.login, name='login'),
+    path('accounts/auth/', views.auth_view, name='auth'),
+    path('accounts/logout/', views.logout, name='logout'),
+    path('accounts/loggedin/', views.loggedin, name='loggedin'),
+    path('accounts/invalid/', views.invalid_login, name='invalid'),
+    path('accounts/register/', views.register_user, name='register'),
+    path('accounts/register_success/', views.register_success, name='register_success'),
 
     # articles
     path('articles/', include('article.urls', namespace='article')),

@@ -2,8 +2,8 @@
 
 {% block sidebar %}
 <ul>
-    <li><a href="/articles/all">Articles</a></li>
-    <li><a href="/articles/create">Create Article</a></li>
+    <li><a href="{% url 'article:all' %}">Articles</a></li>
+    <li><a href="{% url 'article:create' %}">Create Article</a></li>
 </ul>
 {% endblock %}
 
@@ -18,7 +18,7 @@
 {% for article in articles %}
 <div>
     <h2>
-        <a href="/articles/get/{{ article.id }}/">{{ article.title }}</a>
+        <a href="{% url 'article:single' article.id %}">{{ article.title }}</a>
     </h2>
     <p>{{ article.body|lower|truncatewords:"10" }}</p>
     <p>{{ article.likes }} people liked this article</p>
