@@ -30,7 +30,7 @@ class ArticleViewsTests(TestCase):
         article.refresh_from_db()
         self.assertEqual(article.likes, 1)
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(response['Location'], f'/articles/get/{article.id}')
+        self.assertEqual(response['Location'], f'/articles/get/{article.id}/')
 
     def test_add_comment_creates_comment_and_redirects(self):
         article = Article.objects.create(
@@ -46,7 +46,7 @@ class ArticleViewsTests(TestCase):
         )
 
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(response['Location'], f'/articles/get/{article.id}')
+        self.assertEqual(response['Location'], f'/articles/get/{article.id}/')
         self.assertEqual(Comment.objects.filter(article=article).count(), 1)
         comment = Comment.objects.get(article=article)
         self.assertEqual(comment.name, 'Alice')
